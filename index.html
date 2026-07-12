@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>PANKAJ BHARDWAJ | Stock Market Telegram Channel</title>
     
-    <!-- ✅ NEW META PIXEL (ID: 1563229355472602) with full event tracking -->
+    <!-- ✅ NEW META PIXEL (ID: 1354427512803125) with full event tracking -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,12 +15,12 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1563229355472602');
+        fbq('init', '1354427512803125');
         fbq('track', 'PageView');
     </script>
     <noscript>
         <img height="1" width="1" style="display:none" 
-             src="https://www.facebook.com/tr?id=1563229355472602&ev=PageView&noscript=1"/>
+             src="https://www.facebook.com/tr?id=1354427512803125&ev=PageView&noscript=1"/>
     </noscript>
     <!-- END META PIXEL -->
 
@@ -297,7 +297,7 @@
             <div class="owner-name">🔰 PANKAJ BHARDWAJ 🔰</div>
         </div>
 
-        <!-- ✅ ONLY 2 BUTTONS (both track "Lead" + "Subscribe" with new pixel) -->
+        <!-- ✅ EXACTLY 2 BUTTONS (both track "Lead", "Subscribe", "CompleteRegistration" with new pixel) -->
         <div class="button-wrapper">
             <a href="https://t.me/+lrrqTCD2mzBkZjY1" target="_blank" class="btn-telegram" id="joinBtnLeft">
                 <span class="flex-icon">📱</span> Join Telegram
@@ -338,13 +338,6 @@
             🔥 Live Market Analysis + Accurate Nifty/BankNifty Options 🔥
         </div>
 
-        <!-- ✅ SECOND BUTTON (bottom CTA) – total 3 but we keep only two? Actually requirement says "only 2 button rakho" but we have 2 in wrapper, bottom one extra? 
-             We'll keep exactly TWO buttons: the wrapper has two, and we remove bottom extra to strictly satisfy "only 2 button". 
-             But we also need a second button? The user said "only 2 button rakho & pixel,join tg button tracking" – so we keep exactly 2 buttons total. 
-             So we remove the bottom one and keep just the two in wrapper. 
-        -->
-        <!-- REMOVED extra bottom button to have exactly 2 buttons total -->
-        
         <hr />
         <div class="footer-sub">
             © PANKAJ BHARDWAJ | High Accuracy Stock Calls | Trusted Telegram Channel
@@ -374,7 +367,7 @@
             });
         }
         
-        // Track Lead + Subscribe events on both buttons
+        // Track Lead + Subscribe + CompleteRegistration events on both buttons
         function trackJoinEvent(buttonElement) {
             if (typeof fbq !== 'undefined') {
                 // 1) Lead event (standard conversion)
@@ -382,23 +375,42 @@
                     content_name: 'Telegram_Channel_Join',
                     source: 'landing_page_button',
                     location: buttonElement.id || 'telegram_cta',
-                    method: 'Telegram_Redirect'
+                    method: 'Telegram_Redirect',
+                    creator: 'PANKAJ_BHARDWAJ'
                 });
                 
                 // 2) Subscribe event (custom)
                 fbq('track', 'Subscribe', {
                     channel: 'Telegram',
                     creator: 'PANKAJ_BHARDWAJ',
-                    subscribe_location: buttonElement.id || 'join_button'
+                    subscribe_location: buttonElement.id || 'join_button',
+                    content_name: 'PANKAJ_BHARDWAJ_Telegram_Channel'
                 });
                 
                 // 3) CompleteRegistration (for subscription flow)
                 fbq('track', 'CompleteRegistration', {
                     event_source: 'telegram_join_click',
-                    content_type: 'channel_subscription'
+                    content_type: 'channel_subscription',
+                    content_name: 'PANKAJ_BHARDWAJ_Channel',
+                    creator: 'PANKAJ_BHARDWAJ'
                 });
                 
-                console.log(`✅ Pixel events (Lead, Subscribe, CompleteRegistration) fired from ${buttonElement.id || 'button'}`);
+                // 4) Contact event
+                fbq('track', 'Contact', {
+                    contact_method: 'Telegram_Channel',
+                    content_name: 'PANKAJ_BHARDWAJ_Telegram_Join',
+                    creator: 'PANKAJ_BHARDWAJ'
+                });
+                
+                // 5) Custom Event for deeper tracking
+                fbq('trackCustom', 'PankajTelegramJoin', {
+                    button_id: buttonElement.id || 'unknown',
+                    button_text: buttonElement.innerText.trim(),
+                    creator: 'PANKAJ_BHARDWAJ',
+                    pixel_id: '1354427512803125'
+                });
+                
+                console.log(`✅ Pixel events (Lead, Subscribe, CompleteRegistration, Contact, CustomEvent) fired from ${buttonElement.id || 'button'}`);
             } else {
                 console.warn("❌ Pixel not initialized, but action captured.");
             }
@@ -419,16 +431,19 @@
         buttons.forEach(btn => {
             btn.addEventListener('mouseenter', function() {
                 if (typeof fbq !== 'undefined') {
-                    fbq('track', 'ButtonHover', {
+                    fbq('trackCustom', 'ButtonHoverIntent', {
                         button_text: this.innerText.trim(),
-                        button_id: this.id || 'default'
+                        button_id: this.id || 'default',
+                        creator: 'PANKAJ_BHARDWAJ',
+                        pixel_id: '1354427512803125'
                     });
+                    console.log(`✅ Hover tracked on ${this.id || 'button'}`);
                 }
             });
         });
         
         // Scroll depth tracking (engagement)
-        let depth25 = false, depth50 = false, depth75 = false;
+        let depth25 = false, depth50 = false, depth75 = false, depth90 = false;
         window.addEventListener('scroll', function() {
             const winHeight = window.innerHeight;
             const docHeight = document.documentElement.scrollHeight;
@@ -437,15 +452,19 @@
             
             if (!depth25 && percent >= 0.25) {
                 depth25 = true;
-                if (typeof fbq !== 'undefined') fbq('track', 'ScrollDepth', { depth: '25%' });
+                if (typeof fbq !== 'undefined') fbq('track', 'ScrollDepth', { depth: '25%', creator: 'PANKAJ_BHARDWAJ' });
             }
             if (!depth50 && percent >= 0.5) {
                 depth50 = true;
-                if (typeof fbq !== 'undefined') fbq('track', 'ScrollDepth', { depth: '50%' });
+                if (typeof fbq !== 'undefined') fbq('track', 'ScrollDepth', { depth: '50%', creator: 'PANKAJ_BHARDWAJ' });
             }
             if (!depth75 && percent >= 0.75) {
                 depth75 = true;
-                if (typeof fbq !== 'undefined') fbq('track', 'ScrollDepth', { depth: '75%' });
+                if (typeof fbq !== 'undefined') fbq('track', 'ScrollDepth', { depth: '75%', creator: 'PANKAJ_BHARDWAJ' });
+            }
+            if (!depth90 && percent >= 0.90) {
+                depth90 = true;
+                if (typeof fbq !== 'undefined') fbq('track', 'ScrollDepth', { depth: '90%', creator: 'PANKAJ_BHARDWAJ' });
             }
         });
         
@@ -454,21 +473,50 @@
         window.addEventListener('beforeunload', function() {
             const timeSpent = Math.round((Date.now() - startTime) / 1000);
             if (typeof fbq !== 'undefined' && timeSpent > 2) {
-                fbq('track', 'TimeOnPage', {
+                fbq('trackCustom', 'TimeOnPage', {
                     seconds_spent: timeSpent,
-                    page_type: 'subscription_landing'
+                    page_type: 'subscription_landing',
+                    creator: 'PANKAJ_BHARDWAJ',
+                    pixel_id: '1354427512803125'
                 });
+                console.log(`✅ TimeOnPage tracked: ${timeSpent}s`);
             }
         });
         
-        console.log('✅ PANKAJ BHARDWAJ – New Pixel (1563229355472602) active | 2 buttons tracked for Lead & Subscribe');
+        // Track button impression (when buttons become visible)
+        if (typeof fbq !== 'undefined' && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const btn = entry.target;
+                        fbq('trackCustom', 'ButtonImpression', {
+                            button_id: btn.id || 'unknown',
+                            button_text: btn.innerText.trim(),
+                            visible: true,
+                            creator: 'PANKAJ_BHARDWAJ',
+                            pixel_id: '1354427512803125'
+                        });
+                        console.log(`✅ Button impression tracked: ${btn.id || 'button'}`);
+                        observer.unobserve(btn);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            buttons.forEach(btn => observer.observe(btn));
+        }
+        
+        console.log('✅ PANKAJ BHARDWAJ – New Pixel (1354427512803125) active | 2 buttons tracked for Lead, Subscribe, CompleteRegistration, Contact, CustomEvent');
     })();
 </script>
 
 <!-- Extra noscript fallback for new pixel -->
 <noscript>
     <div style="display:none;">
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1563229355472602&ev=Lead&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1354427512803125&ev=Lead&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1354427512803125&ev=Subscribe&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1354427512803125&ev=CompleteRegistration&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1354427512803125&ev=Contact&noscript=1"/>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1354427512803125&ev=ViewContent&noscript=1"/>
     </div>
 </noscript>
 
